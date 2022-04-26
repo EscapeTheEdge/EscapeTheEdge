@@ -4,12 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - MAST_Holder
+  - Enemy Body
+  - Enemy Head
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Nothing
   - Water
   - UI
   - Ground

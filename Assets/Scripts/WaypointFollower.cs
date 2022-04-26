@@ -1,11 +1,11 @@
-using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatformStandard : MonoBehaviour
+public class WaypointFollower : MonoBehaviour
 {
     [SerializeField] GameObject[] waypoints;
+    [SerializeField] bool withRotation = false;
     int currentWaypointIndex = 0;
 
     [SerializeField] float speed = 1f;
@@ -26,5 +26,9 @@ public class MovingPlatformStandard : MonoBehaviour
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
+        
+        if(withRotation){
+            transform.LookAt(waypoints[currentWaypointIndex].transform,Vector3.up);
+        }
     }
 }
