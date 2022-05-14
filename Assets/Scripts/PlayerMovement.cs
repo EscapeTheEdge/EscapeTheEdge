@@ -32,26 +32,20 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (isMoving) Move();
-        else CheckInput();
-        // rb.velocity = new Vector3(horizontalInput*movementSpeed, rb.velocity.y, verticalInput*movementSpeed);
-
-        // if (Input.GetButtonDown("Jump") && IsPlayerTouchingGround()){
-        // Jump();
-        // }
+        CheckInput();
     }
 
     private void CheckInput()
     {
-        int horizontalInput = Math.Sign(Input.GetAxis("Horizontal"));
-        int verticalInput = Math.Sign(Input.GetAxis("Vertical"));
-
-
-        if (horizontalInput != 0) StartMove(new Vector3(horizontalInput, 0, 0));
-        if (verticalInput != 0) StartMove(new Vector3(0, 0, verticalInput));
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) StartMove(new Vector3(-1, 0, 0));
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) StartMove(new Vector3(1, 0, 0));
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) StartMove(new Vector3(0, 0, 1));
+        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S)) StartMove(new Vector3(0, 0, -1));
     }
 
     private void StartMove(Vector3 direction)
     {
+        if(isMoving) EndMove();
         goalMeshPosition = meshPosition + direction;
         goalWorldPosition = (goalMeshPosition * meshSize) + meshOffset;
         isMoving = true;
@@ -62,9 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.time > moveStartTime + moveDuration)
         {
-            isMoving = false;
-            worldPosition = goalWorldPosition;
-            meshPosition = goalMeshPosition;
+            EndMove();
             return;
         }
 
@@ -72,5 +64,13 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = Vector3.Lerp(worldPosition, goalWorldPosition, animation.Evaluate(interpolation));
         rb.transform.position = movement;
+    }
+
+    private void EndMove()
+    {
+        isMoving = false;
+        rb.transform.position = goalWorldPosition;
+        worldPosition = goalWorldPosition;
+        meshPosition = goalMeshPosition;
     }
 }
