@@ -6,16 +6,19 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float meshSize = 1f;
     [SerializeField] Vector3 meshOffset;
+    [SerializeField] private float moveDuration = 0.2f;
     [SerializeField] float movementSpeed = 5f;
     [SerializeField] float jumpForce = 5f;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
+    [SerializeField] AnimationCurve animation;
 
     private Boolean isMoving;
     private Vector3 meshPosition;
     private Vector3 goalMeshPosition;
     private Vector3 worldPosition;
     private Vector3 goalWorldPosition;
+    private float moveStartTime;
     Rigidbody rb;
 
     // Start is called before the first frame update
@@ -52,11 +55,12 @@ public class PlayerMovement : MonoBehaviour
         goalMeshPosition = meshPosition + direction;
         goalWorldPosition = (goalMeshPosition * meshSize) + meshOffset;
         isMoving = true;
+        moveStartTime = Time.time;
     }
 
     private void Move()
     {
-        if (rb.transform.position == goalWorldPosition)
+        if (Time.time > moveStartTime + moveDuration)
         {
             isMoving = false;
             worldPosition = goalWorldPosition;
@@ -64,7 +68,9 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        Vector3 movement = Vector3.MoveTowards(rb.transform.position, goalWorldPosition, 2f * Time.deltaTime);
+        float interpolation = (Time.time - moveStartTime) / moveDuration;
+
+        Vector3 movement = Vector3.Lerp(worldPosition, goalWorldPosition, animation.Evaluate(interpolation));
         rb.transform.position = movement;
     }
 }
