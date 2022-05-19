@@ -12,7 +12,7 @@ public class PlayerLife : MonoBehaviour
         }
     }
     void Die(){
-        GetComponent<MeshRenderer>().enabled = false;
+        // GetComponent<MeshRenderer>().enabled = false;
         // GetComponent<MeshRenderer>().isKinematic = true;
         GetComponent<PlayerMovement>().enabled = false;
         Invoke(nameof(ReloadLevel),1.3f);
