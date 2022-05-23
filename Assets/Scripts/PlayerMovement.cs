@@ -35,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
         CheckInput();
     }
 
+    public int GetProgress()
+    {
+        return (int)meshPosition.z;
+    }
+
     private void CheckInput()
     {
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) StartMove(new Vector3(-1, 0, 0));
@@ -45,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartMove(Vector3 direction)
     {
-        if(isMoving) EndMove();
+        if (isMoving) EndMove();
         goalMeshPosition = meshPosition + direction;
         goalWorldPosition = (goalMeshPosition * meshSize) + meshOffset;
         isMoving = true;
