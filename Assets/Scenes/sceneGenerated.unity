@@ -149,13 +149,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 141369895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37760d919cb9af54e821501761778c38, type: 3}
+  m_Script: {fileID: 11500000, guid: 880246d0d7bbe07479b08bbc1088b2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapSegments:
-  - {fileID: 1033993794}
   - {fileID: 1105995247}
   - {fileID: 1028509445}
+  - {fileID: 1033993794}
   player: {fileID: 1327918968}
   generationMargin: 10
 --- !u!4 &141369897
@@ -504,7 +504,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 782f28e02b6c94e40b714b5c96af1eb6, type: 2}
+  - {fileID: 2100000, guid: 1ab2800a4991d7847b83a587794e5134, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
