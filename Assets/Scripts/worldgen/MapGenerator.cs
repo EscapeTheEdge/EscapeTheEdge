@@ -49,6 +49,8 @@ public class MapGenerator : MonoBehaviour
         {
             var newObject = Instantiate(template, transform);
             newObject.transform.position = new Vector3(0, 0, generatedUntil + i + 1);
+            newObject.GetComponent<MapInitializer>()?.Initialize();
+
             currentMap.Enqueue(newObject);
         }
 

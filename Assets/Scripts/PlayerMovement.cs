@@ -59,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
     private void StartMove(Vector3 direction)
     {
         if (isMoving) EndMove();
+        if (!canMove(direction)) return;
+
         goalMeshPosition = meshPosition + direction;
         goalWorldPosition = (goalMeshPosition * meshSize) + meshOffset;
         isMoving = true;
@@ -73,9 +75,9 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        float interpolation = (Time.time - moveStartTime) / moveDuration;
+        var interpolation = (Time.time - moveStartTime) / moveDuration;
 
-        Vector3 movement = Vector3.Lerp(worldPosition, goalWorldPosition, animation.Evaluate(interpolation));
+        var movement = Vector3.Lerp(worldPosition, goalWorldPosition, animation.Evaluate(interpolation));
         rb.transform.position = movement;
     }
 
@@ -85,5 +87,11 @@ public class PlayerMovement : MonoBehaviour
         rb.transform.position = goalWorldPosition;
         worldPosition = goalWorldPosition;
         meshPosition = goalMeshPosition;
+    }
+
+    private bool canMove(Vector3 direction)
+    {
+        LayerMask mask = LayerMask.GetMask("Barrier");
+        return !Physics.Raycast(transform.position, direction, 1f, mask);
     }
 }
