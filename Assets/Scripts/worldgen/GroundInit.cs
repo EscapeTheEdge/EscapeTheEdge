@@ -4,7 +4,7 @@ using Random = System.Random;
 
 public class GroundInit : MonoBehaviour, MapInitializer
 {
-    [SerializeField] private GameObject treeTemplate;
+    [SerializeField] private GameObject treeTemplate = GameObject.Find("Tree_4");
     [SerializeField] private Vector3 treeOffset = new Vector3(0, 1, 0);
 
     public void Initialize()
@@ -29,5 +29,6 @@ public class GroundInit : MonoBehaviour, MapInitializer
     
     void Start()
     {
+    	treeTemplate = GameObject.Find("Tree_4");
     }
 }
