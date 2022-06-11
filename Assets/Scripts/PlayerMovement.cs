@@ -21,14 +21,6 @@ public class PlayerMovement : MonoBehaviour
     private float moveStartTime;
     Rigidbody rb;
 
-    private Boolean isMoving;
-    private Vector3 meshPosition;
-    private Vector3 goalMeshPosition;
-    private Vector3 worldPosition;
-    private Vector3 goalWorldPosition;
-    private float moveStartTime;
-    Rigidbody rb;
-
     // Start is called before the first frame update
     void Start()
     {
