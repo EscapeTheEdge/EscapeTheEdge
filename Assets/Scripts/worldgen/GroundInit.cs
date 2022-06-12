@@ -5,12 +5,12 @@ using Random = System.Random;
 public class GroundInit : MonoBehaviour, MapInitializer
 {
     [SerializeField] private GameObject treeTemplate;
-    [SerializeField] private Vector3 treeOffset = new Vector3(0, 1, 0);
+    [SerializeField] private Vector3 treeOffset = new Vector3(-1f, 0.5f, 0);
 
     public void Initialize()
     {
         var random = new Random();
-        var numberOfTrees = random.Next(8);
+        var numberOfTrees = random.Next(5);
         var treePositions = Enumerable.Range(0, 20)
             .ToList()
             .OrderBy(_ => random.Next())
