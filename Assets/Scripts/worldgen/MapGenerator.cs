@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using UnityEditor.SceneTemplate;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject[] mapSegments;
+    [SerializeField] private GameObject grassSegment;
+    [SerializeField] private GameObject pathSegment;
+    [SerializeField] private GameObject roadSegment;
     [SerializeField] private GameObject player;
     [SerializeField] private int generationMargin = 10;
 
@@ -35,15 +36,32 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateNext()
     {
-        int biomeWidth = Random.Range(1, 4);
         int templateIndex;
         do
         {
-            templateIndex = Random.Range(0, mapSegments.Length);
+            templateIndex = Random.Range(0, 4);
         } while (templateIndex == lastGeneratedIndex);
-
+        
         lastGeneratedIndex = templateIndex;
-        GameObject template = mapSegments[templateIndex];
+        
+        GameObject template;
+        int biomeWidth;
+        
+        switch(templateIndex)
+        {
+        case 0: 
+        	template = pathSegment;
+        	biomeWidth = Random.Range(1, 4);
+        	break;
+        case 1:
+        	template = roadSegment;
+        	biomeWidth = Random.Range(1, 4);
+        	break;
+        default:
+        	template = grassSegment;
+        	biomeWidth = Random.Range(2, 6);
+        	break;
+        };
 
         for (int i = 0; i < biomeWidth; i++)
         {

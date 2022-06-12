@@ -576,7 +576,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level-02
+          m_StringArgument: sceneWinter
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &628155686
@@ -631,6 +631,7 @@ GameObject:
   - component: {fileID: 1020551534}
   - component: {fileID: 1020551537}
   - component: {fileID: 1020551538}
+  - component: {fileID: 1020551539}
   m_Layer: 5
   m_Name: Button 01
   m_TagString: Untagged
@@ -703,16 +704,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1020551538}
-        m_TargetAssemblyTypeName: GroundInit, Assembly-CSharp
-        m_MethodName: Initialize
-        m_Mode: 1
+      - m_Target: {fileID: 1020551537}
+        m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
+        m_MethodName: StartLevel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: sceneGenerated
+          m_StringArgument: sceneSummer
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1020551535
@@ -779,6 +780,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treeTemplate: {fileID: 0}
   treeOffset: {x: 0, y: 1, z: 0}
+--- !u!114 &1020551539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020551532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3226082836f3e6bdb238eeab4b2af31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassSegment: {fileID: 0}
+  pathSegment: {fileID: 0}
+  roadSegment: {fileID: 0}
+  player: {fileID: 0}
+  generationMargin: 10
 --- !u!1 &1038263999
 GameObject:
   m_ObjectHideFlags: 0

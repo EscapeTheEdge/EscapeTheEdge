@@ -42,16 +42,33 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckInput()
     {
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) StartMove(new Vector3(-1, 0, 0));
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) StartMove(new Vector3(1, 0, 0));
-        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) StartMove(new Vector3(0, 0, 1));
-        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S)) StartMove(new Vector3(0, 0, -1));
+        Vector3 jump = new Vector3(0, 0, 0);
+        Vector3 land = new Vector3(0, 0, 0);
+
+        if (Input.GetKeyUp(KeyCode.Space) && IsPlayerTouchingGround()){
+            jump = new Vector3(0, 1, 0);
+            land = new Vector3(0, -1, 0);
+        };
+        StartMove(jump);
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) {
+            StartMove(new Vector3(-1, 0, 0));
+        };
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) {
+            StartMove(new Vector3(1, 0, 0));
+        };
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) {
+            StartMove(new Vector3(0, 0, 1));
+        };
+        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S)) {
+            StartMove(new Vector3(0, 0, -1));
+        };
+        StartMove(land);
     }
 
     private void StartMove(Vector3 direction)
     {
         if (isMoving) EndMove();
-        if (!canMove(direction)) return;
+        //if (!canMove(direction)) return;
 
         goalMeshPosition = meshPosition + direction;
         goalWorldPosition = (goalMeshPosition * meshSize) + meshOffset;
@@ -85,5 +102,9 @@ public class PlayerMovement : MonoBehaviour
     {
         LayerMask mask = LayerMask.GetMask("Barrier");
         return !Physics.Raycast(transform.position, direction, 1f, mask);
+    }
+
+    bool IsPlayerTouchingGround(){
+        return Physics.CheckSphere(groundCheck.position, .1f,ground);
     }
 }
