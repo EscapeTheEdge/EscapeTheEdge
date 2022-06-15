@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             jump = new Vector3(0, 1, 0);
             land = new Vector3(0, -1, 0);
         };
-        StartMove(jump);
+        // StartMove(jump);
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) {
             StartMove(new Vector3(-1, 0, 0));
         };
@@ -62,13 +62,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S)) {
             StartMove(new Vector3(0, 0, -1));
         };
-        StartMove(land);
+        // StartMove(land);
     }
 
     private void StartMove(Vector3 direction)
     {
         if (isMoving) EndMove();
-        //if (!canMove(direction)) return;
+        if (!canMove(direction)) return;
 
         goalMeshPosition = meshPosition + direction;
         goalWorldPosition = (goalMeshPosition * meshSize) + meshOffset;
