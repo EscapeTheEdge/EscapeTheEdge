@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,10 +22,19 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // Die if collided with an enemy
+        if (other.gameObject.CompareTag("Enemy Body"))
+        {
+            Die();
+        }
+    }
+
     void Die()
     {
-        GetComponent<MeshRenderer>().enabled = false;
-        // GetComponent<MeshRenderer>().isKinematic = true;
+        // GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<PlayerMovement>().enabled = false;
         Invoke(nameof(ReloadLevel), 1.3f);
     }

@@ -7,7 +7,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject pathSegment;
     [SerializeField] private GameObject roadSegment;
     [SerializeField] private GameObject player;
-    [SerializeField] private int generationMargin = 10;
+    [SerializeField] private int generationMargin = 30;
 
     private PlayerMovement playerMovement;
     private int generatedUntil = 0;
