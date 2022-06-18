@@ -36,7 +36,8 @@ public class PlayerLife : MonoBehaviour
         // GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<PlayerMovement>().enabled = false;
-        Invoke(nameof(ReloadLevel), 1.3f);
+        // Invoke(nameof(ReloadLevel), 1.3f);
+        SceneManager.LoadScene("Kill Scene");
     }
 
     void ReloadLevel()
