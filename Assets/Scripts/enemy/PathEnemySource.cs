@@ -3,7 +3,7 @@ using UnityEngine;
 using Random = System.Random;
 
 
-public class PathEnemySource : MonoBehaviour
+public class PathEnemySource : MonoBehaviour, Source
 {
     [SerializeField] private GameObject enemyTemplate;
     [SerializeField] private float maxEnemyDistance = 40f;

@@ -6,6 +6,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject grassSegment;
     [SerializeField] private GameObject pathSegment;
     [SerializeField] private GameObject roadSegment;
+    [SerializeField] private GameObject riverSegment;
     [SerializeField] private GameObject player;
     [SerializeField] private int generationMargin = 30;
 
@@ -17,6 +18,7 @@ public class MapGenerator : MonoBehaviour
     private const int GRASS_SEGMENT_INDEX = 0;
     private const int PATH_SEGMENT_INDEX = 1;
     private const int ROAD_SEGMENT_INDEX = 2;
+    private const int RIVER_SEGMENT_INDEX = 3;
 
     void Start()
     {
@@ -56,6 +58,10 @@ public class MapGenerator : MonoBehaviour
                 template = grassSegment;
                 biomeWidth = Random.Range(2, 4);
                 break;
+            case RIVER_SEGMENT_INDEX:
+                template = riverSegment;
+                biomeWidth = Random.Range(2, 4);
+                break;
         }
 
         InitializeSegment(template, biomeWidth);
@@ -67,7 +73,7 @@ public class MapGenerator : MonoBehaviour
         int templateIndex;
         do
         {
-            templateIndex = Random.Range(0, 3);
+            templateIndex = Random.Range(0, 4);
         } while (templateIndex == lastGeneratedIndex);
 
         if (lastGeneratedIndex != GRASS_SEGMENT_INDEX && Random.Range(0, 2) % 2 == 0)

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = System.Random;
 
-public class RoadEnemySource: MonoBehaviour
+public class RoadEnemySource: MonoBehaviour, Source
 {
     [SerializeField] private GameObject enemyTemplate;
     [SerializeField] private float maxEnemyDistance = 20f;
