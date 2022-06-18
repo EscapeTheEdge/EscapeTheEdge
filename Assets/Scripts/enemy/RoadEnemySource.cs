@@ -44,6 +44,6 @@ public class RoadEnemySource: MonoBehaviour
 
     private void generateEnemyTimert()
     {
-        nextEnemyTimer = (random.Next() % 400) / 100f + 2f;
+        nextEnemyTimer = (random.Next() % 400) / 100f + 3f;
     }
 }

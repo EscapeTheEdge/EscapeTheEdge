@@ -47,6 +47,6 @@ public class PathEnemySource : MonoBehaviour
 
     private void generateEnemyTimert()
     {
-        nextEnemyTimer = (random.Next() % 200) / 100f + 0.5f;
+        nextEnemyTimer = (random.Next() % 200) / 100f + 0.7f;
     }
 }
