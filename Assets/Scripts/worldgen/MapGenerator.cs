@@ -39,27 +39,14 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateNext()
     {
-        int templateIndex;
-        do
-        {
-            templateIndex = Random.Range(0, 4);
-        } while (templateIndex == lastGeneratedIndex);
-
-        if (generatedUntil == 0)
-        {
-            templateIndex = GRASS_SEGMENT_INDEX;
-        }
-        
-        lastGeneratedIndex = templateIndex;
-
         GameObject template = grassSegment;
         int biomeWidth = 0;
 
-        switch (templateIndex)
+        switch (GetRandomTemplateIndex())
         {
             case PATH_SEGMENT_INDEX:
                 template = pathSegment;
-                biomeWidth = Random.Range(1, 3);
+                biomeWidth = Random.Range(1, 4);
                 break;
             case ROAD_SEGMENT_INDEX:
                 template = roadSegment;
@@ -67,12 +54,34 @@ public class MapGenerator : MonoBehaviour
                 break;
             case GRASS_SEGMENT_INDEX:
                 template = grassSegment;
-                biomeWidth = Random.Range(2, 3);
+                biomeWidth = Random.Range(2, 4);
                 break;
         }
 
         InitializeSegment(template, biomeWidth);
         generatedUntil += biomeWidth;
+    }
+
+    private int GetRandomTemplateIndex()
+    {
+        int templateIndex;
+        do
+        {
+            templateIndex = Random.Range(0, 3);
+        } while (templateIndex == lastGeneratedIndex);
+
+        if (lastGeneratedIndex != GRASS_SEGMENT_INDEX && Random.Range(0, 2) % 2 == 0)
+        {
+            templateIndex = GRASS_SEGMENT_INDEX;
+        }
+
+        if (generatedUntil == 0)
+        {
+            templateIndex = GRASS_SEGMENT_INDEX;
+        }
+
+        lastGeneratedIndex = templateIndex;
+        return templateIndex;
     }
 
     private void InitializeSegment(GameObject template, int biomeWidth)
