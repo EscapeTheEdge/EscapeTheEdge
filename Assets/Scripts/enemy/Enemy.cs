@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PathEnemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     private float speed;
     private Vector3 direction;

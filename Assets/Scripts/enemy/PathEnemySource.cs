@@ -6,7 +6,7 @@ using Random = System.Random;
 public class PathEnemySource : MonoBehaviour
 {
     [SerializeField] private GameObject enemyTemplate;
-    [SerializeField] private float maxEnemyDistance = 20f;
+    [SerializeField] private float maxEnemyDistance = 40f;
     [SerializeField] private float minEnemySpeed;
     [SerializeField] private float maxEnemySpeed;
 
@@ -39,7 +39,7 @@ public class PathEnemySource : MonoBehaviour
         {
             var enemy = Instantiate(enemyTemplate, transform);
             enemy.transform.localPosition = new Vector3();
-            enemy.GetComponent<PathEnemy>().Initialize(enemySpeed, enemyDirection, maxEnemyDistance);
+            enemy.GetComponent<Enemy>().Initialize(enemySpeed, enemyDirection, maxEnemyDistance);
 
             generateEnemyTimert();
         }
