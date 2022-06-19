@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        worldPosition = meshOffset;
+        goalWorldPosition = meshOffset;
+        StaticClass.playerZ = 0;
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
     }
@@ -41,18 +44,30 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckInput()
     {
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) {
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+        {
             StartMove(new Vector3(-1, 0, 0));
-        };
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) {
+        }
+
+        ;
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+        {
             StartMove(new Vector3(1, 0, 0));
-        };
-        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) {
+        }
+
+        ;
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
+        {
             StartMove(new Vector3(0, 0, 1));
-        };
-        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S)) {
+        }
+
+        ;
+        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
+        {
             StartMove(new Vector3(0, 0, -1));
-        };
+        }
+
+        ;
     }
 
     private void StartMove(Vector3 direction)
@@ -93,12 +108,13 @@ public class PlayerMovement : MonoBehaviour
     {
         LayerMask mask = LayerMask.GetMask("Barrier");
         bool barrier = Physics.Raycast(transform.position, direction, 1f, mask);
-        int nextX = (int)(meshPosition.x + direction.x); 
+        int nextX = (int)(meshPosition.x + direction.x);
         bool mapLimit = nextX < 10 && nextX > -10;
         return !barrier && mapLimit;
     }
 
-    bool IsPlayerTouchingGround(){
-        return Physics.CheckSphere(groundCheck.position, .1f,ground);
+    bool IsPlayerTouchingGround()
+    {
+        return Physics.CheckSphere(groundCheck.position, .1f, ground);
     }
 }
