@@ -26,6 +26,8 @@ public class MapGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    	if (playerMovement == null)
+    		return;
         if (playerMovement.GetProgress() + generationMargin > generatedUntil)
         {
             GenerateNext();

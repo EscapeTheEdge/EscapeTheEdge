@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector3 meshOffset;
     [SerializeField] private float moveDuration = 0.2f;
     [SerializeField] float movementSpeed = 5f;
-    [SerializeField] float jumpForce = 5f;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
     [SerializeField] AnimationCurve animation;
@@ -42,14 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckInput()
     {
-        Vector3 jump = new Vector3(0, 0, 0);
-        Vector3 land = new Vector3(0, 0, 0);
-
-        if (Input.GetKeyUp(KeyCode.Space) && IsPlayerTouchingGround()){
-            jump = new Vector3(0, 1, 0);
-            land = new Vector3(0, -1, 0);
-        };
-        // StartMove(jump);
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) {
             StartMove(new Vector3(-1, 0, 0));
         };
@@ -62,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S)) {
             StartMove(new Vector3(0, 0, -1));
         };
-        // StartMove(land);
     }
 
     private void StartMove(Vector3 direction)
@@ -88,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
         var movement = Vector3.Lerp(worldPosition, goalWorldPosition, animation.Evaluate(interpolation));
         rb.transform.position = movement;
+        StaticClass.playerZ = movement.z;
     }
 
     private void EndMove()
@@ -101,7 +92,10 @@ public class PlayerMovement : MonoBehaviour
     private bool canMove(Vector3 direction)
     {
         LayerMask mask = LayerMask.GetMask("Barrier");
-        return !Physics.Raycast(transform.position, direction, 1f, mask);
+        bool barrier = Physics.Raycast(transform.position, direction, 1f, mask);
+        int nextX = (int)(meshPosition.x + direction.x); 
+        bool mapLimit = nextX < 10 && nextX > -10;
+        return !barrier && mapLimit;
     }
 
     bool IsPlayerTouchingGround(){

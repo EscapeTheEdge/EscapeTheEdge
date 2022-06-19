@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/sceneWinter.unity
     guid: febf752e36b6790cb8535931b1e0083b
+  - enabled: 1
+    path: Assets/Scenes/Kill Scene.unity
+    guid: f321465c534f7590bb73ab155dacb318
   m_configObjects: {}
