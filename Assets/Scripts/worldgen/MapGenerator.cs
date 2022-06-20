@@ -10,8 +10,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int generationMargin = 30;
 
     private PlayerMovement playerMovement;
-    private int generatedUntil = 0;
-    private int generatedSince = 0;
+    private int generatedUntil = -3;
+    private int generatedSince = -3;
     private Queue<GameObject> currentMap = new();
     private int lastGeneratedIndex = -1;
     private const int GRASS_SEGMENT_INDEX = 0;
@@ -21,6 +21,7 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         playerMovement = player.GetComponent<PlayerMovement>();
+        InitializeSegment(grassSegment, 3);
     }
 
     // Update is called once per frame
@@ -61,7 +62,6 @@ public class MapGenerator : MonoBehaviour
         }
 
         InitializeSegment(template, biomeWidth);
-        generatedUntil += biomeWidth;
     }
 
     private int GetRandomTemplateIndex()
@@ -96,6 +96,7 @@ public class MapGenerator : MonoBehaviour
 
             currentMap.Enqueue(newObject);
         }
+        generatedUntil += biomeWidth;
     }
 
     private void RemoveLast()
